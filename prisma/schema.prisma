@@ -32,7 +32,7 @@ model Product {
 model User {
   id        String   @id @default(uuid())
   nickname  String   @unique
-  nome      String
+  name      String
   password  String
   image     String
   createdAt DateTime @default(now()) @map("created_at")

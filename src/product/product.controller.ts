@@ -40,7 +40,7 @@ export class ProductController {
     summary: 'Listar um produto pelo ID',
   })
   findOne(@Param('id') id: string) {
-    return this.productService.findOne(+id);
+    return this.productService.findOne(id);
   }
 
   @Patch(':id')
@@ -48,7 +48,7 @@ export class ProductController {
     summary: 'Atualizar um produto pelo ID',
   })
   update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-    return this.productService.update(+id, updateProductDto);
+    return this.productService.update(id, updateProductDto);
   }
 
   @Delete(':id')
@@ -56,7 +56,7 @@ export class ProductController {
   @ApiOperation({
     summary: 'Deletar um produto pelo ID',
   })
-  remove(@Param('id') id: string) {
-    return this.productService.remove(+id);
+  delete(@Param('id') id: string) {
+    return this.productService.delete(id);
   }
 }
