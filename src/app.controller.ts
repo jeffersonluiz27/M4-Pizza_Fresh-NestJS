@@ -13,7 +13,7 @@ export class AppController {
   @ApiOperation({
     summary: 'Status da Aplicação',
   })
-  getAppStatus(@Req() req: Request): string {
+  getAppStatus(@Req() req: Request) {
     const baseUrl = req.protocol + '://' + req.get('host');
     return this.appService.getAppStatus(baseUrl);
   }
