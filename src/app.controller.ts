@@ -1,7 +1,8 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Req } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ApiTags } from '@nestjs/swagger';
 import { ApiOperation } from '@nestjs/swagger';
+import { Request } from 'express';
 
 @ApiTags('status')
 @Controller()
@@ -12,7 +13,8 @@ export class AppController {
   @ApiOperation({
     summary: 'Status da Aplicação',
   })
-  getAppStatus(): string {
-    return this.appService.getAppStatus();
+  getAppStatus(@Req() req: Request): string {
+    const baseUrl = req.protocol + '://' + req.get('host');
+    return this.appService.getAppStatus(baseUrl);
   }
 }
