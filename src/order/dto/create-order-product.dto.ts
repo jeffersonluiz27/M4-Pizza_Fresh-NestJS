@@ -17,10 +17,9 @@ export class CreateOrderProductDto {
   })
   quantity: number;
 
-  @IsString()
   @ApiProperty({
     description: 'Observações do produto',
     example: 'Sem cebola',
   })
-  description: string;
+  description?: string;
 }

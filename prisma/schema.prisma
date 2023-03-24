@@ -64,7 +64,7 @@ model OrderProduct {
   product     Product @relation(fields: [productId], references: [id])
   productId   String  @map("product_id")
   quantity    Int
-  description String
+  description String?
 
   @@unique([orderId, productId])
   @@map("order_to_product")
