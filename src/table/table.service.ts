@@ -50,13 +50,13 @@ export class TableService {
 
   async delete(id: string) {
     try {
-      await this.prisma.table.delete({ where: { id } });
+      await this.findById(id);
+      const deleteTable = this.prisma.table.delete({
+        where: { id },
+      });
+      await this.prisma.$transaction([deleteTable])
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        if (e.code === 'P2025') {
-          console.log('Record to delete does not exist.');
-        }
-      }
+      return e
     }
   }
 }

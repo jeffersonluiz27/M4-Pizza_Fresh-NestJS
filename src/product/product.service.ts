@@ -46,13 +46,13 @@ export class ProductService {
 
   async delete(id: string) {
     try {
-      await this.prisma.product.delete({ where: { id } });
+      await this.findById(id);
+      const deleteProduct = this.prisma.product.delete(
+        { where: { id },
+      });
+      await this.prisma.$transaction([deleteProduct]);
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        if (e.code === 'P2025') {
-          console.log('Record to delete does not exist.');
-        }
-      }
+      return e
     }
   }
 }
