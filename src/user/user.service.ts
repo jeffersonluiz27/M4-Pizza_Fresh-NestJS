@@ -81,18 +81,6 @@ export class UserService {
       .catch(handleError);
   }
 
-  /* async delete(id: string) {
-    try {
-      await this.prisma.user.delete({ where: { id } });
-    } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        if (e.code === 'P2025') {
-          console.log('Record to delete does not exist.');
-        }
-      }
-    }
-  } */
-
   async delete(id: string) {
     try{
       await this.findById(id);
