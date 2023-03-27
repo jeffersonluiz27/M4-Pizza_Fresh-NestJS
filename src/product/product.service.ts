@@ -45,14 +45,15 @@ export class ProductService {
   }
 
   async delete(id: string) {
-    try {
       await this.findById(id);
-      const deleteProduct = this.prisma.product.delete(
-        { where: { id },
-      });
-      await this.prisma.$transaction([deleteProduct]);
-    } catch (e) {
-      return e
-    }
+      const deleteProduct = await this.prisma.product.delete({
+        where: { id },
+        select: {
+          id: true
+        }
+      }).catch(handleError);
+
+      return deleteProduct;
+
   }
 }

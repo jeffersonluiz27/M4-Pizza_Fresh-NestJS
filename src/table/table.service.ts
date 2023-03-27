@@ -49,14 +49,14 @@ export class TableService {
   }
 
   async delete(id: string) {
-    try {
-      await this.findById(id);
-      const deleteTable = this.prisma.table.delete({
-        where: { id },
-      });
-      await this.prisma.$transaction([deleteTable])
-    } catch (e) {
-      return e
-    }
+    await this.findById(id);
+    const deleteTable = await this.prisma.table.delete({
+      where: { id },
+      select: {
+        id: true
+      }
+    }).catch(handleError);
+
+    return deleteTable;
   }
 }

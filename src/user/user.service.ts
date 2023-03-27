@@ -82,14 +82,14 @@ export class UserService {
   }
 
   async delete(id: string) {
-    try{
-      await this.findById(id);
-      const deleteUser = this.prisma.user.delete({
-        where: { id },
-      });
-      await this.prisma.$transaction([deleteUser]);
-    } catch (e) {
-      return e
-    }
+    await this.findById(id);
+    const deleteUser = await this.prisma.user.delete({
+      where: { id },
+      select: {
+        id: true
+      }
+    }).catch(handleError);
+
+    return deleteUser;
   }
 }
